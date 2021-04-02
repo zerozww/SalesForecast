@@ -29,9 +29,9 @@ def get_store_with_type(store_type):
 
 # 获取各种类商店的商品各类销售量
 def get_goods_sale_in_category_with_type(store_type):
-    sql = 'SELECT [goods_code],COUNT([id]) as [count] FROM [dbo].[store_sales] where [store_code] in (SELECT [' \
-          'store_code] from [dbo].[store] where [store_type] =\'' + store_type + '\') GROUP BY [goods_code] ORDER BY ' \
-                                                                                 '[count] DESC '
+    sql = 'SELECT [goods_code],COUNT([id]) as [count] FROM [dbo].[store_sales] where [goods_code] < \'110008000001\' ' \
+          'and [store_code] in (SELECT [store_code] from [dbo].[store] where [store_type] =\'' + store_type + '\') ' \
+            'GROUP BY [goods_code] ORDER BY [count] DESC '
     return get_df_from_db(sql)
 
 
